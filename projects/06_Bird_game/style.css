@@ -1,0 +1,31 @@
+canvas {
+    border: 1px solid #000;
+    display: block;
+    margin: 0 auto;
+}
+#gameContainer {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    border: 2px solid #000;
+}
+#gameCanvas {
+    display: block;
+}
+#restartButton:hover {
+    background-color: #ccc;
+}
+#gameCanvas { border: 1px solid black; }
+#startButton, #restartButton { 
+    display: none; 
+    position: absolute;
+    top: 310px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 30px;
+    background-color: #f0f0f0;
+    border: 3px solid #000;
+    cursor: pointer;
+}

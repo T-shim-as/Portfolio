@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="mb-3">案件の削除</h1>
+  <div class="alert alert-danger">
+    <p>本当に "{{ object.name }}" を削除しますか？</p>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+      <i class="fas fa-trash"></i> 削除
+    </button>
+    <a href="{% url 'project_detail' object.pk %}" class="btn btn-secondary">
+      <i class="fas fa-times"></i> キャンセル
+    </a>
+  </form>
+{% endblock %}
