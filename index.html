@@ -14,7 +14,9 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-1SK3EQD7NS');
+      gtag('config', 'G-1SK3EQD7NS', {
+      'anonymize_ip': true
+      });
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -75,8 +77,9 @@
       <div class="container px-4">
         <h1 id="portfolio-list" class="text-white font-weight-bold float-left">ポートフォリオ一覧</h1>
         <div class="text-right float-right">
-          <a href="https://github.com/T-shim-as/Portfolio" class="btn btn-outline-light border-2" target="_blank" rel="noopener noreferrer" style="letter-spacing: 0.07em; border-width: 2px;">
+          <a href="https://github.com/T-shim-as" class="btn btn-outline-light border-2" target="_blank" rel="noopener noreferrer" style="letter-spacing: 0.07em; border-width: 2px;">
             <i class="fab fa-github"></i> GitHub
+          </a>
           </a>
         </div>
       </div>
@@ -93,7 +96,7 @@
             </div> 
             <div class="card-body">
               <p class="card-text">研修中に独自に開発している成果物です。<br>システム開発の実務経験が限られている中で、自身の技術力と独立した開発能力を証明するために作成しています。<br>Djangoフレームワークを使用し、フルスタックで開発しています。</p>
-              <p class="small card-text">※デモ環境, GoogleMapAPIは常時動作していません。見れない場合があります。</p>
+              <!-- <p class="small card-text">※デモ環境, GoogleMapAPIは常時動作していません。見れない場合があります。</p> -->
             </div>
             <div class="card-body p-0 m-0 accordion" id="emsDetails">
               <div class="list-group-flush">
@@ -282,8 +285,11 @@
     </main>
 
     <footer class="container text-center mt-5 pt-5">
+      <small class="text-secondary">このサイトではアクセス解析のためGoogle Analyticsを使用しています。 収集されたデータは匿名化され、サイトの改善目的にのみ使用されます。</small>
+      <br>
       <small class="py-0 my-0 text-secondary">Designed by TetsuyaShimasaki / Developed by TetsuyaShimasaki</small>
     </footer>
+
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
@@ -297,6 +303,11 @@
           }
         });
       });	
+      window.onload = function() {
+          if (!localStorage.getItem('cookieConsent')) {
+              document.getElementById('cookie-banner').style.display = 'block';
+          }
+      }
     </script>
   </body>
 </html>
