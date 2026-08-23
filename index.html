@@ -95,7 +95,7 @@
               </a>
             </div> 
             <div class="card-body">
-              <p class="card-text">画面上の特定エリアをリアルタイムで監視し、指定した画像が出現した瞬間にポップアップ通知およびGmail経由でメール通知を行うデスクトップアプリケーションです。<br>PyInstallerにより単一EXE化し、直感的なダークテーマGUIと高速なテンプレートマッチングを実現しています。</p>
+              <p class="card-text">画面上の特定エリアをリアルタイムで監視し、指定した画像が出現した瞬間にポップアップ通知およびメール通知（画像自動添付）を行うデスクトップアプリケーションです。<br>PyInstallerにより単一EXE化し、直感的なダークテーマGUIと高速なテンプレートマッチングを実現しています。</p>
             </div>
             <div class="card-body p-0 m-0 accordion" id="anydetectDetails">
               <div class="list-group-flush">
@@ -113,7 +113,7 @@
                   ・言語: Python 3.13<br>
                   ・GUI: CustomTkinter (モダンUI / ダーク・ライトテーマ対応)<br>
                   ・画像処理: OpenCV (cv2.matchTemplate), Pillow (PIL)<br>
-                  ・通知機能: Windows トースト通知 (winotify), SMTP (Gmail TLS暗号化送信)<br>
+                  ・通知機能: Windows トースト通知 (winotify), SMTP (TLS暗号化による自動メール送信・画像添付)<br>
                   ・OS制御: Windows API (ctypes) によるスリープ防止制御<br>
                   ・パッケージング: PyInstaller (ワンファイルEXE化)<br>
                   ・バージョン管理: Git, GitHub<br>
@@ -124,7 +124,7 @@
                   ・テンプレート画像のRAM事前キャッシュによる超高速＆省電力マッチング<br>
                   ・長押しオートリピート対応の監視間隔微調整ステッパー<br>
                   ・リアルタイムプレビュー枠の折りたたみ＆ライブ同期<br>
-                  ・検知時のスクリーンショット自動添付メール送信<br>
+                  ・検知時のスクリーンショット自動添付メール送信（任意の宛先アドレスへ送信可能）<br>
                   ・ログの右クリックコピー＆色分け表示機能<br>
                 </div>
                 <div class="list-group-item">
