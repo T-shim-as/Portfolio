@@ -88,20 +88,20 @@
       <div class="row">
         <section class="col-lg-6 mb-5" id="08_AnyDetect">
           <div class="card">
-            <a class="card-header text-dark text-lg" href="https://github.com/T-shim-as/AnyDetect" target="_blank">AnyDetect - 画像検知＆通知デスクトップアプリ</a>
+            <a class="card-header text-dark text-lg" href="#08_AnyDetect">AnyDetect - 画像検知＆アクションマクロ自動化デスクトップアプリ (v2.0.1)</a>
             <div class="card-body p-0 border-bottom">
-              <a href="https://github.com/T-shim-as/AnyDetect" target="_blank">
-                <img src="projects/08_AnyDetect/app_preview.png" alt="AnyDetect" width="100%" height="250" class="b">
+              <a href="#08_AnyDetect">
+                <img src="projects/08_AnyDetect/app_preview.png" alt="AnyDetect v2.0.1" width="100%" height="250" class="b">
               </a>
             </div> 
             <div class="card-body">
-              <p class="card-text">画面上の特定エリアをリアルタイムで監視し、指定した画像が出現した瞬間にポップアップ通知およびメール通知（画像自動添付）を行うデスクトップアプリケーションです。<br>PyInstallerにより単一EXE化し、直感的なダークテーマGUIと高速なテンプレートマッチングを実現しています。</p>
+              <p class="card-text">画面上の特定エリアをリアルタイムで監視し、指定画像の出現をトリガーに「マクロ自動操作（クリック・キー入力・外部プログラム実行等）」や「マルチ通知（音声・トースト・画像添付メール）」を実行するWindowsデスクトップ自動化ツールです。<br>マルチモニター完全対応のリアルタイム透過オーバーレイ、PyInstallerによる単一EXE化、DWM透過制御など高度なWindowsネイティブ技術を組み込んでいます。</p>
             </div>
             <div class="card-body p-0 m-0 accordion" id="anydetectDetails">
               <div class="list-group-flush">
                 <div class="list-group-item border-top">役割: 企画・設計・GUI実装・パッケージング（単独開発）</div>
                 <div class="list-group-item py-2 d-flex align-items-center justify-content-between rounded-bottom">
-                  <span>制作時期: 2026年8月</span>
+                  <span>制作時期: 2026年8月 (v1.0) / 2026年9月 (v2.0.1 大規模改修)</span>
                   <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#collapseAnyDetect" aria-expanded="false" aria-controls="collapseAnyDetect">
                     詳細を表示
                   </button>
@@ -112,25 +112,30 @@
                   <b>【技術スタック】</b><br>
                   ・言語: Python 3.13<br>
                   ・GUI: CustomTkinter (モダンUI / ダーク・ライトテーマ対応)<br>
+                  ・自動化・入力制御: PyAutoGUI, pyperclip (マウス・キーボード操作、マクロ自動実行)<br>
                   ・画像処理: OpenCV (cv2.matchTemplate), Pillow (PIL)<br>
-                  ・通知機能: Windows トースト通知 (winotify), SMTP (TLS暗号化による自動メール送信・画像添付)<br>
-                  ・OS制御: Windows API (ctypes) によるスリープ防止制御<br>
+                  ・音声制御: winsound (Windows PlaySound API による非同期サウンド通知)<br>
+                  ・通知機能: Windows トースト通知 (winotify), SMTP (TLS暗号化による自動メール送信・画像添付), 検知時キャプチャ自動保存<br>
+                  ・OS制御: Windows API (ctypes / user32 / gdi32) によるスリープ防止制御、マルチモニター仮想スクリーン制御、DWM複合透過レイヤードウィンドウ制御<br>
                   ・パッケージング: PyInstaller (ワンファイルEXE化)<br>
                   ・バージョン管理: Git, GitHub<br>
                 </div>
                 <div class="list-group-item">
                   <b>【主な機能・特徴】</b><br>
-                  ・画面上のドラッグ＆ドロップによる直感的な監視領域（ROI）指定<br>
-                  ・テンプレート画像のRAM事前キャッシュによる超高速＆省電力マッチング<br>
-                  ・長押しオートリピート対応の監視間隔微調整ステッパー<br>
-                  ・リアルタイムプレビュー枠の折りたたみ＆ライブ同期<br>
-                  ・検知時のスクリーンショット自動添付メール送信（任意の宛先アドレスへ送信可能）<br>
-                  ・ログの右クリックコピー＆色分け表示機能<br>
+                  ・マルチモニター全画面対応のリアルタイム透過領域指定（選択枠内だけ白半透明が抜けるスニッピング風UI）<br>
+                  ・画像パターン相関（0.8以上）＋カラー検証による誤検知防止アルゴリズム<br>
+                  ・検知時アクションマクロ自動実行（検知座標クリック、キー送信、待機、コマンド起動）<br>
+                  ・アクション手順の直感的なドラッグ＆ドロップ並べ替え（半透明角丸カードUI）<br>
+                  ・7種類の通知音プリセット（テスト再生・音量スライダー付き）<br>
+                  ・検知瞬間の画面を capture_log/ へ自動保存＆ワンクリックフォルダ展開<br>
+                  ・指定検知回数到達での自動監視終了機能<br>
+                  ・デスクトップ上に監視領域を常時表示するクリックスルー赤点線枠オーバーレイ<br>
+                  ・監視中のPCスリープ自動防止<br>
                 </div>
                 <div class="list-group-item">
-                  <b>【リンク】</b><br>
-                  ・<a href="https://github.com/T-shim-as/AnyDetect" target="_blank"><b>GitHubリポジトリ（ソースコード）</b></a><br>
-                  ・<a href="https://github.com/T-shim-as/AnyDetect/releases/latest" target="_blank"><b>最新リリース（ZIPダウンロード）</b></a><br>
+                  <b>【配布・リンク】</b><br>
+                  ・<b>配布形態: </b><span class="badge badge-primary">BOOTHにて近日公開・販売準備中</span><br>
+                  ・<b>ライセンス: </b>商用クローズドソース（All rights reserved）<br>
                 </div>
               </div>
             </div>
