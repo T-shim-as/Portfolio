@@ -86,6 +86,56 @@
     </header>
     <main class="container">
       <div class="row">
+        <section class="col-lg-6 mb-5" id="09_HowasabaSchedule">
+          <div class="card">
+            <a class="card-header text-dark text-lg" href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">ホワサバ スケジュール生成 - チャット特化マトリクス＆リアルタイム共同編集ツール</a>
+            <div class="card-body p-0 border-bottom">
+              <a href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">
+                <img src="projects/09_HowasabaSchedule/app_preview.png" alt="ホワサバ スケジュール生成" width="100%" height="250" class="b">
+              </a>
+            </div> 
+            <div class="card-body">
+              <p class="card-text">スマートフォン戦略ゲーム「ホワイトアウト・サバイバル」の同盟幹部（R5/R4）向けスケジュール支援Webアプリです。<br>ゲーム内等幅チャット特有の制約（改行上限10回、全角16文字幅の自動折り返し、サロゲートペアによる文字幅ズレ）を精密な文字幅計算と自然折り返し技術で克服。さらにFirebase Cloud Firestoreを用いたリアルタイム双方向同期により、複数幹部間でのリアルタイム共同編集と編集中競合ガードを実現しています。</p>
+            </div>
+            <div class="card-body p-0 m-0 accordion" id="howasabaDetails">
+              <div class="list-group-flush">
+                <div class="list-group-item border-top">役割: 企画・要件定義・UI/UX設計・フロントエンド実装・サーバーレスDB設計（単独開発）</div>
+                <div class="list-group-item py-2 d-flex align-items-center justify-content-between rounded-bottom">
+                  <span>制作時期: 2026年10月</span>
+                  <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHowasaba" aria-expanded="false" aria-controls="collapseHowasaba">
+                    詳細を表示
+                  </button>
+                </div>
+              </div>
+              <div id="collapseHowasaba" class="collapse list-group-flush" data-parent="#howasabaDetails">
+                <div class="list-group-item border-top">
+                  <b>【技術スタック】</b><br>
+                  ・フロントエンド: HTML5, CSS3, JavaScript (ES6+), Tailwind CSS<br>
+                  ・クラウドDB / BaaS: Firebase Cloud Firestore (リアルタイム双方向同期 onSnapshot / セキュリティルール)<br>
+                  ・セキュリティ・暗号化: Web Crypto API (SubtleCrypto / SHA-256 ハッシュ化によるクライアント認証)<br>
+                  ・アルゴリズム・文字処理: Unicodeサロゲートペア・異体字対応トークナイザ、半角/全角表示幅計算、末尾スペース自動折り返しフォーマッタ<br>
+                  ・ホスティング / CI/CD: GitHub Pages, Git / GitHub<br>
+                </div>
+                <div class="list-group-item">
+                  <b>【主な機能・課題解決】</b><br>
+                  ・<b>ゲーム内チャット制約の完全克服: </b>「本文改行を消費せず全角16文字幅で自然改行させる末尾スペース付与」「全角・半角・絵文字の精密な幅合わせ」により、スマホ/PC問わず絶対に崩れない表を出力<br>
+                  ・<b>リアルタイム双方向同期: </b>Firebase Firestoreのリスナーにより、同盟内幹部の編集内容をリロード不要で画面へ即座に自動反映<br>
+                  ・<b>編集中競合ガード: </b>自身がモーダルで編集作業中は他者の変更適用を待機させ、作業中データの不意な上書き・消失を防止<br>
+                  ・<b>同盟アカウント認証: </b>アカウントID＋パスワード（SHA-256）による安全な権限分離、旧セッション自動ログアウト付きパスワード変更機能<br>
+                  ・<b>直感的なマトリクス操作: </b>8日間固定テーブル、イベントの優先度ドラッグ並べ替え、重複項目の記号統合（🔴🔵等）＆カスタマイズ<br>
+                  ・<b>モバイルファーストUI: </b>スマートフォンでも折り返さない1段ヘッダー、ハンバーガーメニュー、直感的な直接テキスト編集モード<br>
+                  ・<b>二重の安全性: </b>JSONエクスポート/インポート（バックアップ・別同盟への複製）、初期テンプレート展開機能<br>
+                </div>
+                <div class="list-group-item">
+                  <b>【公開・リンク】</b><br>
+                  ・<b>公開Webサイト: </b><a href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer" class="badge badge-primary text-white py-1 px-2"><i class="fas fa-external-link-alt mr-1"></i>Webアプリを開く</a><br>
+                  ・<b>GitHubリポジトリ: </b><a href="https://github.com/T-shim-as/howasaba_event" target="_blank" rel="noopener noreferrer" class="badge badge-dark text-white py-1 px-2"><i class="fab fa-github mr-1"></i>howasaba_event</a><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="col-lg-6 mb-5" id="08_AnyDetect">
           <div class="card">
             <a class="card-header text-dark text-lg" href="https://holsoc.booth.pm/items/8912916" target="_blank" rel="noopener noreferrer">AnyDetect - 画像検知＆アクションマクロ自動化デスクトップアプリ (v2.1.0)</a>
