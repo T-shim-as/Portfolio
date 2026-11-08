@@ -104,12 +104,12 @@
     </header>
     <main class="container">
       <div class="row">
-        <section class="col-lg-6 mb-5" id="09_HowasabaSchedule">
+        <section class="col-lg-6 mb-5" id="10_HowasabaSchedule">
           <div class="card">
             <a class="card-header text-dark text-lg" href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">ホワサバ スケジュール生成 (v1.3) - チャット特化マトリクス＆リアルタイム共同編集ツール</a>
             <div class="card-body p-0 border-bottom">
               <a href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">
-                <img src="projects/09_HowasabaSchedule/app_preview.png" alt="ホワサバ スケジュール生成" width="100%" height="250" class="b">
+                <img src="projects/10_HowasabaSchedule/app_preview.png" alt="ホワサバ スケジュール生成" width="100%" height="250" class="b">
               </a>
             </div> 
             <div class="card-body">
@@ -160,12 +160,12 @@
           </div>
         </section>
 
-        <section class="col-lg-6 mb-5" id="08_AnyDetect">
+        <section class="col-lg-6 mb-5" id="09_AnyDetect">
           <div class="card">
             <a class="card-header text-dark text-lg" href="https://holsoc.booth.pm/items/8912916" target="_blank" rel="noopener noreferrer">AnyDetect - 画像検知＆アクションマクロ自動化デスクトップアプリ (v2.1.0)</a>
             <div class="card-body p-0 border-bottom">
               <a href="https://holsoc.booth.pm/items/8912916" target="_blank" rel="noopener noreferrer">
-                <img src="projects/08_AnyDetect/app_preview.png" alt="AnyDetect v2.1.0" width="100%" height="250" class="b">
+                <img src="projects/09_AnyDetect/app_preview.png" alt="AnyDetect v2.1.0" width="100%" height="250" class="b">
               </a>
             </div> 
             <div class="card-body">
@@ -215,6 +215,53 @@
             </div>
           </div>
         </section>
+
+        <section class="col-lg-6 mb-5" id="08_X_AutomationBot">
+          <div class="card">
+            <a class="card-header text-dark text-lg" href="projects/08_X_AutomationBot/index.html" target="_blank" rel="noopener noreferrer">X (Twitter) 複数アカウント運用支援 AI Discord Bot</a>
+            <div class="card-body p-0 border-bottom">
+              <a href="projects/08_X_AutomationBot/index.html" target="_blank" rel="noopener noreferrer">
+                <img src="projects/08_X_AutomationBot/app_preview.png" alt="X Automation Bot" width="100%" height="250" class="b">
+              </a>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Google Geminiを活用し、Discordの各チャンネルと連携して複数アカウントのペルソナ（6大属性）と投稿を一元管理するSNS運用アシスタントです。<br>「誤爆・アカウント凍結リスク」をゼロにするため、完全自動化ではなく人間が承認・微修正（Modal）してから投稿するHuman-in-the-Loop設計を採用。さらに、X APIの従量課金制（残高不足402エラー）を克服する「Web Intent（無料リンク）自動生成」とのハイブリッド投稿エンジン、Discordの文字数上限を回避する短縮URL連携など、堅牢な実用アーキテクチャを実装しています。</p>
+            </div>
+            <div class="card-body p-0 m-0 accordion" id="xBotDetails">
+              <div class="list-group-flush">
+                <div class="list-group-item border-top">役割: 企画・要件定義・システム設計・プロンプト設計・実装・テスト（単独開発）</div>
+                <div class="list-group-item py-2 d-flex align-items-center justify-content-between rounded-bottom">
+                  <span>制作時期: 2026年8月〜9月</span>
+                  <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#collapseXBot" aria-expanded="false" aria-controls="collapseXBot">
+                    詳細を表示
+                  </button>
+                </div>
+              </div>
+              <div id="collapseXBot" class="collapse list-group-flush" data-parent="#xBotDetails">
+                <div class="list-group-item border-top">
+                  <b>【技術スタック】</b><br>
+                  ・言語 / ランタイム: Python 3.13, asyncio<br>
+                  ・フレームワーク / API: discord.py (UI / Modal / Slash Commands), Google GenAI SDK (Gemini), Tweepy (X API v2)<br>
+                  ・データ永続化 / スケジューラ: SQLite3 (動的チャンネル属性・投稿履歴管理), APScheduler (定期自動配信)<br>
+                  ・ユーティリティ: Twitter Text加重長計算, TinyURL短縮API (aiohttp)<br>
+                </div>
+                <div class="list-group-item">
+                  <b>【主な機能・設計の工夫】</b><br>
+                  ・<b>Human-in-the-Loop安全設計: </b>AI生成ポストをDiscord UI上でプレビューし、承認・手動修正・フィードバック再生成を経て安全に投稿<br>
+                  ・<b>デュアル投稿エンジン: </b>X API直接投稿と、クレジット不要でXアプリが起動するWeb Intentリンク自動生成を併用（運用費0円化）<br>
+                  ・<b>動的マルチペルソナ: </b>チャンネルごとに「立場・ターゲット・提供価値・口調・型・NGルール」および「長文（X Premium）モード」をSQLiteで動的設定<br>
+                  ・<b>耐障害性・文字数上限対策: </b>Discordの文字数制限（512/1024/6000文字）を短縮URL化と遅延応答（defer）で完全回避<br>
+                </div>
+                <div class="list-group-item">
+                  <b>【公開・リンク】</b><br>
+                  ・<b>プロジェクト詳細LP: </b><a href="projects/08_X_AutomationBot/index.html" target="_blank" rel="noopener noreferrer" class="badge badge-primary text-white py-1 px-2"><i class="fas fa-external-link-alt mr-1"></i>機能解説LPを開く</a><br>
+                  ・<b>GitHubリポジトリ: </b><a href="https://github.com/T-shim-as/x-auto-bot" target="_blank" rel="noopener noreferrer" class="badge badge-dark text-white py-1 px-2"><i class="fab fa-github mr-1"></i>x-auto-bot</a><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="col-lg-6 mb-5" id="07_Engineer_Management_System">
           <div class="card">
             <a class="card-header text-dark text-lg" href="https://tshim.pythonanywhere.com/project/" target="blank">案件管理</a>

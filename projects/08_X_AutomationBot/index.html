@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X (Twitter) 複数アカウント運用支援 AI Discord Bot</title>
+  <!-- Bootstrap CSS & FontAwesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", Meiryo, sans-serif;
+      background-color: #0f141c;
+      color: #e1e7ef;
+      line-height: 1.7;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #15202b 0%, #1a2a3a 50%, #0d1b2a 100%);
+      border-bottom: 1px solid #2f3b4c;
+      padding: 60px 0 40px;
+    }
+    .badge-hybrid {
+      background: linear-gradient(90deg, #1d9bf0, #00ba7c);
+      color: #fff;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    .card-dark {
+      background-color: #192231;
+      border: 1px solid #2b384e;
+      border-radius: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-dark:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      color: #1d9bf0;
+      margin-bottom: 15px;
+    }
+    .code-preview {
+      background-color: #0b0e14;
+      border: 1px solid #243044;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.9rem;
+      color: #79c0ff;
+      overflow-x: auto;
+    }
+    .flow-step {
+      background-color: #1c2738;
+      border-left: 4px solid #1d9bf0;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 0 8px 8px 0;
+    }
+    .tech-pill {
+      display: inline-block;
+      background-color: #24334a;
+      color: #a5c2eb;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      margin: 3px;
+      border: 1px solid #364866;
+    }
+    .preview-img {
+      border: 1px solid #384963;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <nav class="navbar navbar-dark" style="background-color: #0b0f16; border-bottom: 1px solid #1e293b;">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="../../index.html">
+        <i class="fas fa-arrow-left mr-2"></i> ポートフォリオ一覧に戻る
+      </a>
+      <span class="badge badge-secondary py-2 px-3">Project #08</span>
+    </div>
+  </nav>
+
+  <!-- ヒーローヘッダー -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="mb-3">
+            <span class="badge-hybrid"><i class="fas fa-robot mr-1"></i> AI & SNS Automation</span>
+            <span class="badge badge-info ml-2">Human-in-the-Loop</span>
+          </div>
+          <h1 class="font-weight-bold mb-3" style="font-size: 2.2rem; color: #ffffff;">
+            X (Twitter) 複数アカウント運用支援<br>AI Discord Bot
+          </h1>
+          <p class="lead" style="color: #94a3b8;">
+            Google Geminiを活用し、Discordの各チャンネルと連携して複数アカウントのペルソナ・投稿・承認を完全一元管理する次世代SNS運用アシスタント。
+          </p>
+          <div class="mt-4">
+            <span class="tech-pill">Python 3.13</span>
+            <span class="tech-pill">discord.py (asyncio)</span>
+            <span class="tech-pill">Google Gemini API</span>
+            <span class="tech-pill">SQLite3</span>
+            <span class="tech-pill">Tweepy (X API v2)</span>
+            <span class="tech-pill">APScheduler</span>
+          </div>
+          <div class="mt-4">
+            <a href="https://github.com/T-shim-as/x-auto-bot" target="_blank" rel="noopener noreferrer"
+              class="btn btn-primary px-4 py-2 font-weight-bold shadow-sm" style="border-radius: 25px; background-color: #1d9bf0; border-color: #1d9bf0;">
+              <i class="fab fa-github mr-2"></i>GitHubでソースコードを見る
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center mt-4 mt-lg-0">
+          <img src="app_preview.png" alt="Discord Bot UI Preview" class="img-fluid preview-img">
+          <small class="text-muted d-block mt-2">▲ 実際のDiscord画面：AI提案・承認・手動修正・投稿アクション</small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="container my-5">
+
+    <!-- 開発の背景とコアコンセプト -->
+    <section class="mb-5">
+      <h3 class="font-weight-bold border-bottom pb-2 mb-4" style="border-color: #2b384e !important;">
+        <i class="fas fa-bullseye text-primary mr-2"></i> 開発の背景と設計思想
+      </h3>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="card card-dark h-100 p-4">
+            <h5 class="text-white font-weight-bold mb-3">
+              <i class="fas fa-shield-alt text-warning mr-2"></i> 1. Human-in-the-Loop（人間の承認必須）
+            </h5>
+            <p class="text-muted mb-0">
+              AIによる完全自動投稿は誤爆、ハルシネーション（嘘情報）、XのBot規制・凍結リスクを常に孕みます。本システムは「下書き生成・リライトはAI、最終判断・微修正・投稿実行は人間」という厳格な承認プロセスをDiscord UI上で完結させ、ノーリスクな運用を実現しました。
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="card card-dark h-100 p-4">
+            <h5 class="text-white font-weight-bold mb-3">
+              <i class="fas fa-wallet text-success mr-2"></i> 2. コスト0円で運用可能なハイブリッド設計
+            </h5>
+            <p class="text-muted mb-0">
+              近年のX API従量課金制（Pay Per Use）に伴う「402 Payment Required」エラーを克服。API自動投稿だけでなく、ワンタップでX公式アプリが文章入力済みで開く「Web Intent（無料リンク）」を自動生成するデュアル投稿エンジンを独自開発しました。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主な機能一覧 -->
+    <section class="mb-5">
+      <h3 class="font-weight-bold border-bottom pb-2 mb-4" style="border-color: #2b384e !important;">
+        <i class="fas fa-cogs text-info mr-2"></i> 主な機能・アーキテクチャ
+      </h3>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card card-dark h-100 p-4 text-center">
+            <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
+            <h5 class="text-white font-weight-bold">動的マルチチャンネル管理</h5>
+            <p class="text-muted small">
+              Discordチャンネルごとに「立場」「ターゲット」「価値」「口調」「型」「NGルール」の6大属性をSQLiteで独立管理。チャンネルを増やすだけで何個でも別キャラのアカウントを運用可能。
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card card-dark h-100 p-4 text-center">
+            <div class="feature-icon"><i class="fas fa-magic"></i></div>
+            <h5 class="text-white font-weight-bold">3つのポスト生成トリガー</h5>
+            <p class="text-muted small">
+              ① 箇条書きメモの自動リライト<br>
+              ② YouTube/記事URLへの考察ポスト化<br>
+              ③ 朝・夕の指定時刻（APScheduler）によるトレンド自動提案
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card card-dark h-100 p-4 text-center">
+            <div class="feature-icon"><i class="fas fa-edit"></i></div>
+            <h5 class="text-white font-weight-bold">直感的な対話型UI & Modal</h5>
+            <p class="text-muted small">
+              ポップアップ画面（Modal）での直接テキスト修正、フィードバック付き再生成（「もっとフランクに」等）、加重文字数（Twitter Text仕様準拠）のリアルタイム検証。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技術的な課題解決と工夫 -->
+    <section class="mb-5">
+      <h3 class="font-weight-bold border-bottom pb-2 mb-4" style="border-color: #2b384e !important;">
+        <i class="fas fa-wrench text-warning mr-2"></i> 技術的課題と解決へのアプローチ
+      </h3>
+      <div class="flow-step">
+        <h5 class="text-white font-weight-bold mb-1">課題1: 日本語URLエンコードによるDiscord文字数上限エラー（400 Bad Request）</h5>
+        <p class="text-muted mb-0">
+          <b>対策:</b> 100文字以上の日本語をURLエンコードするとDiscordのボタンURL制限（512文字）やEmbed制限（1024文字）を超過する問題に対し、TinyURL API連携による「自動短縮URL化」と非同期遅延応答（<code>defer</code>）を導入。文字数エラーを100%根絶しました。
+        </p>
+      </div>
+      <div class="flow-step">
+        <h5 class="text-white font-weight-bold mb-1">課題2: X Premium（長文ポスト）と通常（140文字）の柔軟な切り替え</h5>
+        <p class="text-muted mb-0">
+          <b>対策:</b> チャンネルごとに <code>is_long_post</code> フラグを設け、Geminiのシステムプロンプトおよび文字数検証ロジックを動的に分岐。140文字の要約ポストから1,000文字超の解説記事ポストまで自由自在に作成可能にしました。
+        </p>
+      </div>
+      <div class="flow-step">
+        <h5 class="text-white font-weight-bold mb-1">課題3: スラッシュコマンドのキャッシュ遅延問題</h5>
+        <p class="text-muted mb-0">
+          <b>対策:</b> Discordグローバル同期の最大1時間の反映遅延を避けるため、Bot起動時（<code>on_ready</code>）に参加中ギルドへ直接コマンドをコピー＆即時強制プッシュする仕組みを実装しました。
+        </p>
+      </div>
+    </section>
+
+    <!-- プロジェクト詳細スペック -->
+    <section class="mb-5">
+      <h3 class="font-weight-bold border-bottom pb-2 mb-4" style="border-color: #2b384e !important;">
+        <i class="fas fa-clipboard-list text-success mr-2"></i> プロジェクト概要・仕様
+      </h3>
+      <div class="card card-dark p-4">
+        <table class="table table-borderless text-light mb-0">
+          <tbody>
+            <tr>
+              <th style="width: 20%; color: #94a3b8;">役割</th>
+              <td>企画・要件定義・システムアーキテクチャ設計・プロンプト設計・実装・テスト（単独開発）</td>
+            </tr>
+            <tr>
+              <th style="color: #94a3b8;">開発時期</th>
+              <td>2026年8月〜9月</td>
+            </tr>
+            <tr>
+              <th style="color: #94a3b8;">開発言語・環境</th>
+              <td>Python 3.13, Windows 11, PowerShell, VS Code</td>
+            </tr>
+            <tr>
+              <th style="color: #94a3b8;">主要技術</th>
+              <td>discord.py, Google GenAI SDK (gemini-2.0-flash / 3.6-flash), Tweepy, SQLite3, APScheduler, aiohttp</td>
+            </tr>
+            <tr>
+              <th style="color: #94a3b8;">コード行数</th>
+              <td>約 1,800 行（テストコード含む）</td>
+            </tr>
+            <tr>
+              <th style="color: #94a3b8;">リポジトリ</th>
+              <td>
+                <a href="https://github.com/T-shim-as/x-auto-bot" target="_blank" rel="noopener noreferrer"
+                  class="badge badge-dark py-2 px-3 text-white" style="background-color: #24334a; font-size: 0.9rem;">
+                  <i class="fab fa-github mr-1"></i> T-shim-as / x-auto-bot
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="text-center py-4 text-muted" style="border-top: 1px solid #1e293b; background-color: #0b0f16;">
+    <div class="container">
+      <p class="mb-0">© 2026 Tetsuya Shimasaki. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
