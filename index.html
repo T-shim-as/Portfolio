@@ -40,6 +40,10 @@
         font-size: 33px;
         transition: .3s;
       }
+      header a,
+      header .btn {
+        transition: .3s;
+      }
       .is-animation {
         padding-top: 10px;
         height: 40px;
@@ -55,7 +59,7 @@
         border-width: 1px !important;
       }
       main {
-        padding-top: 150px;
+        padding-top: 94px;
       }
       .card-header {
         font-size: 18px;
@@ -87,6 +91,63 @@
           margin-top: 6px;
         }
       }
+
+      /* 1800px以上の大画面：コンテナを広げて3列表示 */
+      @media (min-width: 1800px) {
+        .container {
+          max-width: 1700px;
+        }
+        main .row > section {
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
+        }
+      }
+
+      /* 2500px以上のウルトラワイド画面：コンテナを広げて4列表示 */
+      @media (min-width: 2500px) {
+        .container {
+          max-width: 2400px;
+        }
+        main .row > section {
+          flex: 0 0 25%;
+          max-width: 25%;
+        }
+      }
+
+      /* ページトップへ戻るボタン */
+      #backToTopBtn {
+        position: fixed;
+        right: 28px;
+        bottom: 28px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: rgba(33, 37, 41, 0.85);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(12px);
+        transition: opacity .3s, transform .3s, background-color .2s, visibility .3s;
+        z-index: 99;
+      }
+      #backToTopBtn:hover {
+        background-color: #000;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      }
+      #backToTopBtn.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
     </style>
   </head>
 
@@ -98,12 +159,46 @@
           <a href="https://github.com/T-shim-as" class="btn btn-outline-light border-2" target="_blank" rel="noopener noreferrer" style="letter-spacing: 0.07em; border-width: 2px;">
             <i class="fab fa-github"></i> GitHub
           </a>
-          </a>
         </div>
       </div>
     </header>
     <main class="container">
-      <div class="row">
+      <!-- 操作ツールバー: 左 ソート / 右 検索バー -->
+      <div class="row align-items-center justify-content-between" style="min-height: 38px; margin-bottom: 32px;">
+        <!-- 左: ソートドロップダウン -->
+        <div class="col-6 col-sm-5 col-md-4 col-lg-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white text-secondary">
+                <i class="fas fa-sort-amount-down-alt"></i>
+              </span>
+            </div>
+            <select class="custom-select" id="sortSelect" aria-label="並び順">
+              <option value="newest" selected>新しい順</option>
+              <option value="oldest">古い順</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 右: キーワード検索バー -->
+        <div class="col-6 col-sm-6 col-md-5 col-lg-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white text-secondary">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control" placeholder="検索" aria-label="検索">
+            <div class="input-group-append" id="clearSearchWrap" style="display: none;">
+              <button class="btn btn-outline-secondary border-left-0" type="button" id="clearSearchBtn" title="検索クリア" style="border-color: #ced4da;">
+                <i class="fas fa-times text-secondary"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="projectsGrid">
         <section class="col-lg-6 mb-5" id="10_HowasabaSchedule">
           <div class="card">
             <a class="card-header text-dark text-lg" href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">ホワサバ スケジュール生成 (v1.3) - チャット特化マトリクス＆リアルタイム共同編集ツール</a>
@@ -457,6 +552,13 @@
             </ul>
           </div>
         </section>
+
+        <!-- 該当作品なしメッセージ（検索時用） -->
+        <div id="noResultsMessage" class="col-12 text-center py-5 my-4" style="display: none;">
+          <i class="fas fa-search-minus fa-3x text-secondary mb-3"></i>
+          <h4 class="text-secondary font-weight-bold">該当する作品が見つかりませんでした</h4>
+          <p class="text-muted">別のキーワードで検索するか、クリアボタンを押してください。</p>
+        </div>
       </div>
     </main>
 
@@ -476,6 +578,11 @@
       </div>
     </footer>
 
+    <!-- ページトップへ戻るボタン -->
+    <button type="button" id="backToTopBtn" aria-label="ページトップへ戻る" title="ページトップへ戻る">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
@@ -487,6 +594,21 @@
           } else {
             $('header').removeClass('is-animation');
           }
+
+          // 300px以上スクロールした時にトップへ戻るボタンを表示
+          if ( scrollPos > 300 ) {
+            $('#backToTopBtn').addClass('is-visible');
+          } else {
+            $('#backToTopBtn').removeClass('is-visible');
+          }
+        });
+
+        // スムーズスクロールでトップへ戻る
+        $('#backToTopBtn').on('click', function () {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         });
       });	
       window.onload = function() {
@@ -494,6 +616,124 @@
               document.getElementById('cookie-banner').style.display = 'block';
           }
       }
+
+      // 検索 ＆ ソート機能
+      $(function () {
+        var $grid = $('#projectsGrid');
+        var $sections = $grid.children('section');
+        var $searchInput = $('#searchInput');
+        var $clearWrap = $('#clearSearchWrap');
+        var $clearBtn = $('#clearSearchBtn');
+        var $noResults = $('#noResultsMessage');
+        var $sortSelect = $('#sortSelect');
+
+        // 初期順（新しい順: 10 → 01）の要素配列を保持
+        var originalOrder = $sections.toArray();
+
+        // ソート処理
+        function applySort() {
+          var val = $sortSelect.val();
+          var sorted = originalOrder.slice();
+          if (val === 'oldest') {
+            sorted.reverse();
+          }
+          $.each(sorted, function (idx, el) {
+            $grid.append(el);
+          });
+          $grid.append($noResults);
+        }
+
+        $sortSelect.on('change', function () {
+          applySort();
+        });
+
+        // テキスト正規化（全角英数→半角、ひらがな→カタカナ、全角空白→半角空白、小文字化）
+        function normalizeStr(str) {
+          if (!str) return '';
+          return str
+            .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+              return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+            })
+            .replace(/　/g, ' ')
+            .replace(/[\u3041-\u3096]/g, function (ch) {
+              return String.fromCharCode(ch.charCodeAt(0) + 0x60);
+            })
+            .toLowerCase();
+        }
+
+        // 各セクションの検索用データを事前生成（タイトル、ID、本文、画像alt等）
+        var cardData = [];
+        $sections.each(function () {
+          var $sec = $(this);
+          var title = $sec.find('.card-header').text();
+          var secId = $sec.attr('id') || '';
+          var fullText = $sec.text();
+          var altText = '';
+          $sec.find('img').each(function () {
+            altText += ' ' + ($(this).attr('alt') || '');
+          });
+
+          cardData.push({
+            $el: $sec,
+            normTitleNoSpace: normalizeStr(title).replace(/\s+/g, ''),
+            normFull: normalizeStr(title + ' ' + secId + ' ' + fullText + ' ' + altText)
+          });
+        });
+
+        // 検索処理
+        function applyFilter() {
+          var rawQuery = $searchInput.val();
+          var normQuery = normalizeStr(rawQuery).trim();
+          var visibleCount = 0;
+
+          if (normQuery === '') {
+            $clearWrap.hide();
+            $sections.show();
+            $noResults.hide();
+            return;
+          }
+
+          $clearWrap.show();
+
+          var queryNoSpace = normQuery.replace(/\s+/g, '');
+          var keywords = normQuery.split(/\s+/).filter(Boolean);
+
+          $.each(cardData, function (idx, item) {
+            var match = false;
+
+            // 1. スペース有無を問わずタイトルに一致するか（例: "ホワサバスケジュール", "ほわさば", "AnyDetect"）
+            if (item.normTitleNoSpace.indexOf(queryNoSpace) !== -1) {
+              match = true;
+            } else {
+              // 2. AND検索: 全てのキーワードがカード内（タイトル、ID、本文、技術スタック等）に含まれるか
+              match = keywords.every(function (kw) {
+                return item.normFull.indexOf(kw) !== -1;
+              });
+            }
+
+            if (match) {
+              item.$el.show();
+              visibleCount++;
+            } else {
+              item.$el.hide();
+            }
+          });
+
+          if (visibleCount === 0) {
+            $noResults.show();
+          } else {
+            $noResults.hide();
+          }
+        }
+
+        $searchInput.on('input', applyFilter);
+
+        $clearBtn.on('click', function () {
+          $searchInput.val('');
+          applyFilter();
+          $searchInput.focus();
+        });
+      });
     </script>
   </body>
 </html>
