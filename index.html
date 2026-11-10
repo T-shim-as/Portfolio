@@ -201,20 +201,20 @@
       <div class="row" id="projectsGrid">
         <section class="col-lg-6 mb-5" id="10_HowasabaSchedule">
           <div class="card">
-            <a class="card-header text-dark text-lg" href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">ホワサバ スケジュール生成 (v1.3) - チャット特化マトリクス＆リアルタイム共同編集ツール</a>
+            <a class="card-header text-dark text-lg" href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">ホワサバ スケジュール生成 (v1.4) - チャット特化マトリクス＆リアルタイム共同編集ツール</a>
             <div class="card-body p-0 border-bottom">
               <a href="https://t-shim-as.github.io/howasaba_event/" target="_blank" rel="noopener noreferrer">
                 <img src="projects/10_HowasabaSchedule/app_preview.png" alt="ホワサバ スケジュール生成" width="100%" height="250" class="b">
               </a>
             </div> 
             <div class="card-body">
-              <p class="card-text">スマートフォンゲーム「ホワイトアウト・サバイバル」の同盟幹部（R5/R4）向けスケジュール支援Webアプリです。<br>ゲーム内のイベントをスケジュール管理し、ゲーム内でそのまま利用できるテキストを生成します。ゲーム内等幅チャット特有の制約（改行上限10回、全角16文字幅の自動折り返し、サロゲートペアによる文字幅ズレ）を精密な文字幅計算と自然折り返しで克服。さらにFirebase Cloud Firestoreを用いたリアルタイム双方向同期、RTDBによる接続端末数検知、Stripe決済連携、およびサーバー負荷ゼロで即座に試せるLocalStorage完結の「ローカルモード」とクラウド引き継ぎ機能を備えています。</p>
+              <p class="card-text">スマートフォンゲーム「ホワイトアウト・サバイバル」の同盟幹部（R5/R4）向けスケジュール支援Webアプリです。<br>ゲーム内のイベントをスケジュール管理し、ゲーム内でそのまま利用できるテキストを生成します。ゲーム内等幅チャット特有の制約（改行上限10回、全角16文字幅の自動折り返し、サロゲートペアによる文字幅ズレ）を精密な文字幅計算と自然折り返しで克服。さらにFirebase Cloud Firestoreを用いたリアルタイム双方向同期、RTDBによる接続端末数検知＆操作監査ログ、Stripe決済連携、およびサーバー負荷ゼロで即座に試せるLocalStorage完結の「ローカルモード」とクラウド引き継ぎ機能を備えています。</p>
             </div>
             <div class="card-body p-0 m-0 accordion" id="howasabaDetails">
               <div class="list-group-flush">
                 <div class="list-group-item border-top">役割: 企画・要件定義・UI/UX設計・フロントエンド実装・サーバーレスDB設計（単独開発）</div>
                 <div class="list-group-item py-2 d-flex align-items-center justify-content-between rounded-bottom">
-                  <span>制作時期: 2026年10月〜11月 (v1.3.0)</span>
+                  <span>制作時期: 2026年10月〜11月 (v1.4.0)</span>
                   <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHowasaba" aria-expanded="false" aria-controls="collapseHowasaba">
                     詳細を表示
                   </button>
@@ -224,7 +224,7 @@
                 <div class="list-group-item border-top">
                   <b>【技術スタック】</b><br>
                   ・フロントエンド: HTML5, CSS3, JavaScript (ES6+), Tailwind CSS<br>
-                  ・クラウドDB / BaaS: Firebase Cloud Firestore (リアルタイム双方向同期 onSnapshot / セキュリティルール)、Firebase Realtime Database (プレゼンス機能による接続端末数リアルタイム検知)<br>
+                  ・クラウドDB / BaaS: Firebase Cloud Firestore (リアルタイム双方向同期 onSnapshot / セキュリティルール)、Firebase Realtime Database (プレゼンス機能による接続端末数リアルタイム検知 / アカウント単位の監査ログ直近100件自動管理)<br>
                   ・データ永続化 / ストレージ: LocalStorage (独立キー分離によるゲストデータ保存・オフライン完結キャッシュ)<br>
                   ・決済連携: Stripe Payment Link (Apple Pay / Google Pay / クレジットカード決済による開発者支援・寄付連携)<br>
                   ・セキュリティ・暗号化: Web Crypto API (SubtleCrypto / SHA-256 ハッシュ化によるクライアント認証)<br>
@@ -237,6 +237,8 @@
                   ・<b>ゲーム内チャット制約の完全克服: </b>「本文改行を消費せず全角16文字幅で自然改行させる末尾スペース付与」「全角・半角・絵文字の精密な幅合わせ」により、スマホ/PC問わず崩れない表を出力<br>
                   ・<b>リアルタイム双方向同期: </b>Firebase Firestoreのリスナーにより、同盟内幹部の編集内容をリロード不要で画面へ即座に自動反映<br>
                   ・<b>アクティブ接続数検知: </b>Firebase RTDBのプレゼンス機能（.info/connected、onDisconnect）を活用し、現在アプリを開いている端末数をヘッダーにリアルタイム（🟢 接続数: N）表示<br>
+                  ・<b>アカウント操作監査ログ（直近100件）: </b>同盟幹部同士の共有アカウント運用を想定し、「いつ・どの端末（OS/ブラウザ判定）から・何の操作が行われたか」を把握できるタイムライン表示機能を実装（RTDB / LocalStorage両対応）<br>
+                  ・<b>イベント整理＆クイック操作: </b>使わないイベントを隠せる「非表示」機能（イベント管理画面から復元可能）や、イベントバッジの「⋮」メニューから直接編集・非表示・削除ができるコンテキストUIを実装<br>
                   ・<b>サーバー負荷ゼロのローカルモード: </b>アカウント登録なしで即座にアプリを試用可能。Firebase接続・同期を完全に遮断してインフラコストを0に抑えつつ、編集済みデータを保持したまま同盟アカウントへシームレスに昇格・クラウド同期できる引き継ぎ動線を実装<br>
                   ・<b>編集中競合ガード: </b>自身がモーダルで編集作業中は他者の変更適用を待機させ、作業中データの不意な上書き・消失を防止<br>
                   ・<b>同盟アカウント認証: </b>アカウントID＋パスワード（SHA-256）による安全な権限分離、旧セッション自動ログアウト付きパスワード変更機能<br>
